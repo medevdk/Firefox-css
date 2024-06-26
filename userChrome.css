@@ -1,0 +1,65 @@
+/*
+File userChrome.css is for changing the `chrome` of the browser 
+ */
+
+/* Green Letters for active tab */
+tab[selected="true"] {
+  color: rgba(199, 234, 70, 0.75) !important;
+}
+
+tab {
+  -moz-appearance: none !important;
+}
+
+/*
+ * Shameless copy
+ * Hide bookmark toolbar, view when hover
+ */
+#urlbar {
+  border-radius: 25px !important;
+}
+
+#PersonalToolbar {
+  --uc-bm-height: 20px; /* Might need to adjust if the toolbar has other buttons */
+  --uc-bm-padding: 6px; /* Vertical padding to be applied to bookmarks */
+}
+
+:root[uidensity="compact"] #PersonalToolbar {
+  --uc-bm-padding: 1px;
+}
+:root[uidensity="touch"] #PersonalToolbar {
+  --uc-bm-padding: 6px;
+}
+
+#PersonalToolbar:not([customizing]) {
+  margin-bottom: calc(2px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
+  transform: rotateX(90deg);
+  transform-origin: top;
+  /* transition: transform 135ms linear 600ms !important; */
+  transition: transform 60 linear 100 !important;
+  z-index: 1;
+}
+#PlacesToolbarItems {
+  display: flex !important;
+  /* justify-content: center !important; */
+  justify-content: start !important;
+}
+#PlacesToolbarItems > .bookmark-item {
+  padding-block: var(--uc-bm-padding) !important;
+}
+
+/* SELECT ONE BOOKMARKS TOOLBAR BEHAVIOR */
+
+/* ONE | Show when urlbar is focused 
+       #nav-bar:focus-within + #PersonalToolbar{ 
+       transition-delay: 100ms !important; 
+       transform: rotateX(0); 
+   } */
+
+/* TWO | Show when cursor is over the toolbar area 
+  My Personal Choice
+  */
+#navigator-toolbox:hover > #PersonalToolbar {
+  transition-delay: 100ms !important;
+  transform: rotateX(0);
+}
